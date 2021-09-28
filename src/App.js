@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = new Subject();
-    interval(10)
+    interval(1000)
       .pipe(takeUntil(unsubscribe))
       .subscribe(() => {
         if (isWatching) {
@@ -22,7 +22,6 @@ function App() {
         }
       });
     return () => {
-      console.log('unmounted');
       unsubscribe.next();
       unsubscribe.complete();
     };
@@ -31,9 +30,6 @@ function App() {
   const start = () => {
     setIsWatching((prevState) => !prevState);
     setStatus(1);
-    setTimeout(() => {
-      console.log('status', status);
-    }, 1000);
   };
 
   const resume = () => {
